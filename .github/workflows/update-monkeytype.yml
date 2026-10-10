@@ -1,0 +1,38 @@
+name: Update Monkeytype WPM
+
+on:
+  schedule:
+    # Draait elke nacht om 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Zorgt dat je hem ook handmatig kunt triggeren via de acties tab
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Nodig om de README aan te kunnen passen
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run update script
+        env:
+          MONKEYTYPE_API_KEY: ${{ secrets.APE_KEY }}
+        run: python update_readme.py
+
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git commit -m "docs: update monkeytype stats" || echo "No changes to commit"
+          git push
