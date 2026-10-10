@@ -1,3 +1,3 @@
 ## Hi there 👋
 
-![Monkeytype Stats](https://raw.githubusercontent.com/tomprograms/tomprograms/monkeytype-stats/monkeytype-readme-pb.svg)
+[![Monkeytype Stats](https://monkeytype-readme-stats.vercel.app/api/monkeytype?username=TomKoper&theme=retro)](https://github.com/francisdav1d/monkeytype-readme-stats)
