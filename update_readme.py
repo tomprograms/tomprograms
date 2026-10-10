@@ -13,11 +13,12 @@ params = {"mode": "words", "mode2": "25"}
 response = requests.get(URL, headers=headers, params=params)
 data = response.json()
 
-# Pak de WPM en rond af
-jouw_wpm = round(data['data'][0]['wpm'])
+# Pak de WPM en Acc en rond af
+wpm = round(data['data'][0]['wpm'])
+acc = round(data['data'][0]['acc'])
 
 # Genereer de badge
-badge = f"![Monkeytype 25 words](https://img.shields.io/badge/Monkeytype_25_words-{jouw_wpm}_WPM-e2b714?style=for-the-badge&logo=monkeytype&logoColor=2c2e31)"
+badge = f"![Monkeytype 25 words](https://img.shields.io/badge/Monkeytype_25_words-{wpm}_WPM_--_{acc}%25_Acc-e2b714?style=for-the-badge&logo=monkeytype&logoColor=2c2e31)"
 
 # Lees de huidige README
 with open("README.md", "r", encoding="utf-8") as f:
