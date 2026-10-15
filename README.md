@@ -1,4 +1,12 @@
-## Hi there 👋
+## Hi there! 👋
 
+I'm Tom, a third year econometrics student in Rotterdam.
 
-Als ik me verveel, type ik op [MonkeyType](https://monkeytype.com/profile/TomKoper). Mijn huidige highscore op 25 woorden: <!-- monkeytype-start -->**144 WPM** with 100% accuracy<!-- monkeytype-end -->
+Some of the programming assignments from my bachelor can be found on here.
+
+The rest of my repositories are ..
+
+Fun Facts:
+
+- I like sailing
+- When I'm bored I type on [MonkeyType](https://monkeytype.com/profile/TomKoper). My current 25 word highscore is: <!-- monkeytype-start -->**144 WPM** with 100% accuracy<!-- monkeytype-end -->
