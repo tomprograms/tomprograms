@@ -17,19 +17,19 @@ data = response.json()
 wpm = round(data['data'][0]['wpm'])
 acc = round(data['data'][0]['acc'])
 
-# Genereer de badge
-badge = f"![Monkeytype 25 words](https://img.shields.io/badge/Monkeytype_25_words-{wpm}_WPM_--_{acc}%25_Acc-e2b714?style=for-the-badge&logo=monkeytype&logoColor=2c2e31)"
+# Genereer de tekst
+stats = f"**{wpm} WPM** met {acc}% accuracy"
 
 # Lees de huidige README
 with open("README.md", "r", encoding="utf-8") as f:
     readme_content = f.read()
 
-# Vervang de tekst tussen de start en end markers met de nieuwe badge
+# Vervang alleen wat tussen de markers staat
 new_readme = re.sub(
-    r"(<!-- monkeytype-start -->\n).*?(\n?<!-- monkeytype-end -->)",
-    rf"\g<1>{badge}\n\g<2>",
+    r"(<!-- monkeytype-start -->).*?(<!-- monkeytype-end -->)",
+    lambda m: f"{m.group(1)}{stats}{m.group(2)}",
     readme_content,
-    flags=re.DOTALL
+    flags=re.DOTALL,
 )
 
 # Schrijf de nieuwe tekst terug naar de README
