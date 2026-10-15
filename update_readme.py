@@ -5,7 +5,7 @@ from pathlib import Path
 import requests
 
 API_KEY = os.environ.get("APE_KEY")
-URL = "https://api.monkeytype.com/users/personalrecords"
+URL = "https://api.monkeytype.com/users/personalBests"
 README = Path("README.md")
 MARKERS = r"(<!-- monkeytype-start -->).*?(<!-- monkeytype-end -->)"
 
