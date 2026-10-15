@@ -1,7 +1,4 @@
 ## Hi there 👋
 
 
-<!-- monkeytype-start -->
-![Monkeytype 25 words](https://img.shields.io/badge/Monkeytype_25_words-144_WPM_--_100%25_Acc-e2b714?style=for-the-badge&logo=monkeytype&logoColor=2c2e31)
-
-<!-- monkeytype-end -->
+Als ik me verveel, type ik op [MonkeyType](https://monkeytype.com/profile/JOUW_GEBRUIKERSNAAM). Mijn highscore op 25 woorden: <!-- monkeytype-start -->150 WPM met 100% accuracy<!-- monkeytype-end -->
