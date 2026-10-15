@@ -1,37 +1,49 @@
-import requests
 import os
 import re
+import sys
+from pathlib import Path
+import requests
 
-# Haal de API key uit de GitHub Secrets
 API_KEY = os.environ.get("APE_KEY")
-URL = "https://api.monkeytype.com/users/personalBests"
+URL = "https://api.monkeytype.com/users/personalrecords"
+README = Path("README.md")
+MARKERS = r"(<!-- monkeytype-start -->).*?(<!-- monkeytype-end -->)"
 
-headers = {"Authorization": f"ApeKey {API_KEY}"}
-params = {"mode": "words", "mode2": "25"}
+def get_data() -> dict:
+    """Get the 25-word personal record data from the Monkeytype API."""
+    if not API_KEY:
+        sys.exit("APE_KEY is not set")
 
-# Haal de data op
-response = requests.get(URL, headers=headers, params=params)
-data = response.json()
+    res = requests.get(
+        URL,
+        headers={"Authorization": f"ApeKey {API_KEY}"},
+        params={"mode": "words", "mode2": "25"}
+    )
+    res.raise_for_status()
 
-# Pak de WPM en Acc en rond af
-wpm = round(data['data'][0]['wpm'])
-acc = round(data['data'][0]['acc'])
+    results = res.json().get("data")
+    if not results:
+        sys.exit("No personal record found for 25 words")
+    return results[0]
 
-# Genereer de tekst
-stats = f"**{wpm} WPM** met {acc}% accuracy"
+def main() -> None:
+    record = get_data()
+    stats = f"**{round(record['wpm'])} WPM** with {round(record['acc'])}% accuracy"
 
-# Lees de huidige README
-with open("README.md", "r", encoding="utf-8") as f:
-    readme_content = f.read()
+    content = README.read_text(encoding="utf-8")
 
-# Vervang alleen wat tussen de markers staat
-new_readme = re.sub(
-    r"(<!-- monkeytype-start -->).*?(<!-- monkeytype-end -->)",
-    lambda m: f"{m.group(1)}{stats}{m.group(2)}",
-    readme_content,
-    flags=re.DOTALL,
-)
+    # Only replace the text between the markers
+    new_content, count = re.subn(
+        MARKERS,
+        lambda m: f"{m.group(1)}{stats}{m.group(2)}",
+        content,
+        flags=re.DOTALL,
+    )
+    if count == 0:
+        sys.exit("Markers not found in README.md")
 
-# Schrijf de nieuwe tekst terug naar de README
-with open("README.md", "w", encoding="utf-8") as f:
-    f.write(new_readme)
+    README.write_text(new_content, encoding="utf-8")
+
+
+if __name__ == "__main__":
+    main()
